@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"name": "ReactNativeProject",
+		"path": ".."
+	},
+	{
+		"name": "assets",
+		"path": "../../Demo/DoneWithIt/assets"
+	}
+],
+  "settings": {}
+}
