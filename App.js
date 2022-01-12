@@ -20,19 +20,6 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Loginscreen />
-      {/* <Switches /> */}
-      {/* <FlatLists /> */}
-      {/* <ImagePickers /> */}
-      {/* <StackNavigators /> */}
-      {/* <AuthNavigator /> */}
-      {/* <AppNavigator /> */}
-      {/* <Paramss
-      title={"ok"}
-      /> */}
-      {/* <FetchGet /> */}
-      {/* <NetInfos /> */}
-      {/* <AsyncStorages /> */}
-      {/* <Counter /> */}
     </View>
   )
 }
