@@ -43,14 +43,14 @@ function AddBooksToBookStore(props) {
             <Text style={styles.label}>BookName:</Text>
             <TextInput
               style={styles.input}
-              placeholder='Add a Book Name'
+              placeholder='Name of the Book'
               onChangeText={(text) => setBookName(text)}
               maxLength={40}
             />
             <Text style={styles.label}>Author:</Text>
              <TextInput
               style={styles.input}
-              placeholder='Add the Name of the Author'
+              placeholder='Name of the Author'
               onChangeText={(text) => setAuthor(text)}
               maxLength={40}
             />
