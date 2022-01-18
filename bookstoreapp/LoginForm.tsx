@@ -27,8 +27,7 @@ function LoginForm({navigation}) {
         // Converting to JSON
         .then(response => response.json())
         // Displaying results to console
-        .then(data => {console.log(data),    navigation.navigate("Pressables");
-    });
+        .then(data => {console.log(data)});
         //FOR UPDATE PLEASE PASS THE ID TO URL EX : https://jsonplaceholder.typicode.com/posts/101
            }
            catch (error) {
