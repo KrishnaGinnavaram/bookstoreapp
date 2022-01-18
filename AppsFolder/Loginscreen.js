@@ -3,6 +3,7 @@ import { Image, SafeAreaView, StyleSheet, TextInput,Text,View, Button } from 're
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import ErrorMessage from '../Components/ErrorMessage';
+import PushNotification from "react-native-push-notification";
 import { useNavigation } from '@react-navigation/native';
 const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label("Email"),
@@ -12,6 +13,10 @@ const validationSchema = Yup.object().shape({
 function Loginscreen({navigation}) {
 const onSubmit = async(result) => {
     navigation.navigate("Pressables");
+    PushNotification.createChannel({
+        channelId: "FlatList",
+        channelName: "FlatList"
+    })
    try {
     fetch("https://jsonplaceholder.typicode.com/posts", {
     // Adding method type

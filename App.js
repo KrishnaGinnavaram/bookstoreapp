@@ -1,10 +1,18 @@
 import React from "react";
 import {StyleSheet, View } from "react-native";
-import Loginscreen from "./AppsFolder/Loginscreen";
+import AuthNavigator from "./AppsFolder/AuthNavigator";
+import LoginForm from "./project/LoginForm";
+import Kk from "./project/Kk";
+import InstagramFeed from "./project/InstagramFeed";
+import TabNavigator from "./project/instagramTabNavigator/TabNavigator";
 export default function App() {
   return (
     <View style={styles.container}>
-      <Loginscreen />
+      <AuthNavigator />
+      {/* <LoginForm /> */}
+      {/* <Kk /> */}
+      {/* <InstagramFeed /> */}
+      {/* <TabNavigator /> */}
     </View>
   )
 }
