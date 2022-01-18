@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView,StyleSheet,Text} from 'react-native';
+import { SafeAreaView,StyleSheet,Text,View} from 'react-native';
 import { TextInput } from 'react-native';
 import { Button } from 'react-native-elements';
 
@@ -10,7 +10,7 @@ function AddBooksToBookStore(props) {
   const [price,setPrice] = useState('');
 
    const addDetails = async () => {
-    fetch("https://jsonplaceholder.typicode.com/posts", {
+    fetch('https://61dddb4af60e8f0017668ac5.mockapi.io/api/v1/Book', {
         // Adding method type
         method: "POST",
         // Adding body or contents to send
@@ -34,6 +34,12 @@ function AddBooksToBookStore(props) {
    }
     return (
         <SafeAreaView style={styles.container}>
+            <View>
+            <Text style={styles.headerLabel}>Add a New Book</Text>
+            </View>
+
+           <View style={{display: "flex",justifyContent: "space-between",height: "90%"}}>
+            <View>
             <Text style={styles.label}>BookName:</Text>
             <TextInput
               style={styles.input}
@@ -55,13 +61,14 @@ function AddBooksToBookStore(props) {
               onChangeText={(text) => setPrice(text)}
               maxLength={10}
             />
+            </View>
+            <View>
              <Button
                 title="ADD"
                 buttonStyle={{
                   backgroundColor: 'blue',
                   borderWidth: 2,
                   borderColor: 'white',
-                //   borderRadius: 30,
                 }}
                 containerStyle={{
                   width: "90%",
@@ -70,6 +77,8 @@ function AddBooksToBookStore(props) {
                 titleStyle={{ fontWeight: 'bold' }}
                 onPress={addDetails}
               />
+              </View>
+              </View>
        </SafeAreaView>
     );
 }
@@ -77,6 +86,15 @@ function AddBooksToBookStore(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1
+    },
+    headerLabel: {
+      fontSize: 20,
+      width: "100%",
+      backgroundColor: "lightblue",
+      borderWidth: 1,
+      textAlign: "center",
+      height: 50,
+      paddingTop: 10
     },
     input: {
         alignSelf: 'center',
@@ -89,7 +107,8 @@ const styles = StyleSheet.create({
         borderRadius: 5
  },
  label: {
-     marginLeft: 20
+     marginLeft: 20,
+     marginTop: 5
  }
 })
 export default AddBooksToBookStore;

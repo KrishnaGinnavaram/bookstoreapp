@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {SafeAreaView,StyleSheet} from 'react-native';
+import {SafeAreaView,StyleSheet,View,Text} from 'react-native';
 import { FlatList } from 'react-native';
 import DashboardListitem from './DashboardListitem';
 
@@ -19,6 +19,9 @@ function DashboardView(props) {
 
     return (
         <SafeAreaView style={styles.container}>
+            <View>
+            <Text style={styles.headerLabel}>List of Books</Text>
+            </View>
             <FlatList
              data={data}
              keyExtractor={item => item.id }
@@ -37,6 +40,15 @@ function DashboardView(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1
-    }
+    },
+    headerLabel: {
+        fontSize: 20,
+        width: "100%",
+        backgroundColor: "lightblue",
+        borderWidth: 1,
+        textAlign: "center",
+        height: 50,
+        paddingTop: 10
+      },
 })
 export default DashboardView;

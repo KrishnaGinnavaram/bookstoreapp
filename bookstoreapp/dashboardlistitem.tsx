@@ -11,7 +11,7 @@ function DashboardListitem({bookname,author,downloads,price}) {
             size="medium"
              overlayContainerStyle={{backgroundColor: 'lightgray'}}
              activeOpacity={1.0}
-             containerStyle={{margin: 3,width: 120,height: 110}}
+             containerStyle={{margin: 3,width: 120,height: 140}}
             />
 
            <View>
@@ -33,7 +33,7 @@ function DashboardListitem({bookname,author,downloads,price}) {
 const styles = StyleSheet.create({
     container: {
         width: "90%",
-        height: 120,
+        height: 150,
         borderWidth: 1  ,
         borderColor: "black",
         borderStyle: "solid",
@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
         width: 120
     },
     details: {
-        marginLeft: 10
+        marginLeft: 10,
+        width: 100
     },
     price: {
         marginLeft: 45,
