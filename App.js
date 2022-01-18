@@ -1,18 +1,16 @@
 import React from "react";
 import {StyleSheet, View } from "react-native";
-import AuthNavigator from "./AppsFolder/AuthNavigator";
-import LoginForm from "./project/LoginForm";
-import Kk from "./project/Kk";
-import InstagramFeed from "./project/InstagramFeed";
-import TabNavigator from "./project/instagramTabNavigator/TabNavigator";
+import AddBooksToBookStore from "./bookstoreapp/AddBooksToBookStore";
+import BottomTabNavigator from "./bookstoreapp/BottomTabNavigator";
+import DashboardListitem from "./bookstoreapp/DashboardListitem";
+import DashboardView from "./bookstoreapp/DashboardView";
 export default function App() {
   return (
     <View style={styles.container}>
-      <AuthNavigator />
-      {/* <LoginForm /> */}
-      {/* <Kk /> */}
-      {/* <InstagramFeed /> */}
-      {/* <TabNavigator /> */}
+      {/* <DashboardListitem /> */}
+      {/* <DashboardView /> */}
+      {/* <BottomTabNavigator /> */}
+      <AddBooksToBookStore />
     </View>
   )
 }
