@@ -10,14 +10,22 @@ function DashboardView(props) {
     const [flatlistDetails,setFlatListDetails] = useState([]);
     const [searchQuery, setSearchQuery] = React.useState('');
     const [visible, setVisible] = React.useState(false);
+    const [filterVisible, setFilterVisible] = React.useState(false);
 
     const openMenu = (e: any) => {
       setVisible(true);
-      console.log('open menu')
+    }
+
+    const openFilterMenu = (e: any) => {
+      setFilterVisible(true);
     }
 
     const closeMenu = () => {
       setVisible(false);
+    }
+
+    const closeFilterMenu = () => {
+      setFilterVisible(false);
     }
 
     useEffect(() => {
@@ -54,6 +62,21 @@ function DashboardView(props) {
             return parseInt(a.downloads) - parseInt(b.downloads);
         }));
         setVisible(false);
+    }
+
+    const lowCost =  () => {
+       setData(flatlistDetails.filter(item => {return item.price <= 100}))
+      setFilterVisible(false);
+  }
+
+  const mediumCost = () => {
+    setData(flatlistDetails.filter(item => {return item.price > 100 && item.price <= 500}))
+    setFilterVisible(false);
+}
+
+  const highCost = () => {
+    setData(flatlistDetails.filter(item => {return item.price > 500}))
+     setFilterVisible(false);
     }
 
     const onChangeSearch =(e : any) => {
@@ -97,8 +120,8 @@ function DashboardView(props) {
               <Provider>
               <View>
             <Menu
-             visible={visible}
-             onDismiss={closeMenu}
+             visible={filterVisible}
+             onDismiss={closeFilterMenu}
              style={{marginTop: -620}}
               anchor={
               <View>
@@ -115,7 +138,7 @@ function DashboardView(props) {
                 containerStyle={{
                   marginRight: 1
                 }}
-                onPress={openMenu}
+                onPress={openFilterMenu}
                 />
               </View>
               }>
@@ -155,11 +178,11 @@ function DashboardView(props) {
                 />
               </View>
               }>
-               <Menu.Item onPress={sortByPrice} title="Price" />
+               <Menu.Item onPress={lowCost} title=" Price <= $100" />
                <Divider />
-               <Menu.Item onPress={sortByDownloads} title="No.of Downloads" />
+               <Menu.Item onPress={mediumCost} title=" Price > $100 and <= $500" />
                <Divider />
-               <Menu.Item onPress={sortByName} title="Book Name" />
+               <Menu.Item onPress={highCost} title=" Price > $500" />
             </Menu>
            </View>
            </Provider>
