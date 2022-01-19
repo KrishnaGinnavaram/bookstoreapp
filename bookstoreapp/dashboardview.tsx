@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {SafeAreaView,StyleSheet,View,Text} from 'react-native';
 import { FlatList } from 'react-native';
 import DashboardListitem from './DashboardListitem';
 import {Menu, Divider, Provider} from 'react-native-paper';
 import SearchBarComponent from '../components/SearchBarComponent';
-import { Button } from 'react-native-elements';
 import ButtonComponent from '../components/ButtonComponent';
-// import { SearchBar } from 'react-native-elements';
-import { TextInput } from 'react-native';
 function DashboardView(props) {
-
     const [data,setData] = useState([]);
     const [flatlistDetails,setFlatListDetails] = useState([]);
-    const [asc,setAsc] = useState(0);
     const [searchQuery, setSearchQuery] = React.useState('');
     const [visible, setVisible] = React.useState(false);
 
@@ -44,22 +39,21 @@ function DashboardView(props) {
             setData(data.sort((a, b) => {
             return a.name.localeCompare(b.name);
         }));
-        setAsc(asc+1);
-        // e.nativeEvent.stopImmediatePropagation();
+        setVisible(false);
     }
 
     const sortByPrice = () => {
         setData(data.sort((a,b) => {
             return parseInt(a.price) - parseInt(b.price);
         }));
-        setAsc(asc+1);
+        setVisible(false);
     }
 
     const sortByDownloads = () => {
         setData(data.sort((a,b) => {
             return parseInt(a.downloads) - parseInt(b.downloads);
         }));
-        setAsc(asc+1);
+        setVisible(false);
     }
 
     const onChangeSearch =(e : any) => {
@@ -86,27 +80,31 @@ function DashboardView(props) {
              onChangeText={onChangeSearch}
              value={searchQuery}
              />
-            <Provider>
-              <View
-                style={{
-                      marginBottom: 10,
-                      marginTop: 20,
-                      marginLeft: 10,
-                      height: 50,
-                     }}>
+            <FlatList
+             style={{marginTop: 0,zIndex: -10}}
+             data={data}
+             keyExtractor={item => item.id }
+             renderItem={({item}) =>
+            <DashboardListitem
+              bookname={item.name}
+              author={item.author}
+              price={item.price}
+              downloads={item.downloads}
+             />
+            }
+            />
+            <View style={{display: "flex",flexDirection: "row"}}>
+              <Provider>
+              <View>
             <Menu
              visible={visible}
              onDismiss={closeMenu}
+             style={{marginTop: -620}}
               anchor={
               <View>
                 <ButtonComponent
                 title="Sort by"
-                icon={{
-                    name: 'chevron-thin-down',
-                    type: 'entypo',
-                    size: 15,
-                    color: 'white',
-                  }}
+                icon={{}}
                 buttonStyle={{
                   backgroundColor: 'rgba(78, 116, 289, 1)',
                   borderColor: 'rgba(78, 116, 289, 1)',
@@ -115,10 +113,7 @@ function DashboardView(props) {
                 type="outline"
                 titleStyle={{fontSize: 15,color: 'white'}}
                 containerStyle={{
-                  width: 100,
-                  marginLeft: 10,
-                  height: 40,
-                  // paddingBottom: 10
+                  marginRight: 1
                 }}
                 onPress={openMenu}
                 />
@@ -132,19 +127,43 @@ function DashboardView(props) {
             </Menu>
            </View>
            </Provider>
-            <FlatList
-             style={{marginTop: 50,zIndex: -10}}
-             data={data}
-             keyExtractor={item => item.id }
-             renderItem={({item}) =>
-            <DashboardListitem
-              bookname={item.name}
-              author={item.author}
-              price={item.price}
-              downloads={item.downloads}
-             />
-            }
-            />
+
+           <Provider>
+           <View
+                style={{
+                      height: 50,
+                     }}>
+            <Menu
+             visible={visible}
+             onDismiss={closeMenu}
+             style={{marginTop: -620}}
+              anchor={
+              <View>
+                <ButtonComponent
+                title="Filter by"
+                icon={{}}
+                buttonStyle={{
+                  backgroundColor: 'rgba(78, 116, 289, 1)',
+                  borderColor: 'rgba(78, 116, 289, 1)',
+                  borderRadius: 5
+                }}
+                type="outline"
+                titleStyle={{fontSize: 15,color: 'white'}}
+                containerStyle={{
+                }}
+                onPress={openMenu}
+                />
+              </View>
+              }>
+               <Menu.Item onPress={sortByPrice} title="Price" />
+               <Divider />
+               <Menu.Item onPress={sortByDownloads} title="No.of Downloads" />
+               <Divider />
+               <Menu.Item onPress={sortByName} title="Book Name" />
+            </Menu>
+           </View>
+           </Provider>
+           </View>
         </SafeAreaView>
     );
 }
@@ -163,7 +182,3 @@ const styles = StyleSheet.create({
       }
 })
 export default DashboardView;
-
-function e(e: any): void {
-  throw new Error('Function not implemented.');
-}
