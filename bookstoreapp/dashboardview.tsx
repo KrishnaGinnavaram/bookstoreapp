@@ -2,19 +2,28 @@ import React, { useEffect, useState } from 'react';
 import {SafeAreaView,StyleSheet,View,Text} from 'react-native';
 import { FlatList } from 'react-native';
 import DashboardListitem from './DashboardListitem';
-import {Menu, Divider, Provider } from 'react-native-paper';
+import {Menu, Divider, Provider} from 'react-native-paper';
+import SearchBarComponent from '../components/SearchBarComponent';
 import { Button } from 'react-native-elements';
 import ButtonComponent from '../components/ButtonComponent';
+// import { SearchBar } from 'react-native-elements';
+import { TextInput } from 'react-native';
 function DashboardView(props) {
 
     const [data,setData] = useState([]);
+    const [flatlistDetails,setFlatListDetails] = useState([]);
     const [asc,setAsc] = useState(0);
-    const [selectedValue, setSelectedValue] = useState('');
+    const [searchQuery, setSearchQuery] = React.useState('');
     const [visible, setVisible] = React.useState(false);
 
-    const openMenu = () => setVisible(true);
+    const openMenu = (e: any) => {
+      setVisible(true);
+      console.log('open menu')
+    }
 
-    const closeMenu = () => setVisible(false);
+    const closeMenu = () => {
+      setVisible(false);
+    }
 
     useEffect(() => {
         loadBookDetails();
@@ -28,13 +37,15 @@ function DashboardView(props) {
            const response = await fetch('https://61dddb4af60e8f0017668ac5.mockapi.io/api/v1/Book');
            const details = await response.json();
            setData(details);
+           setFlatListDetails(details);
     }
 
-    const sortByName = () => {
+    const sortByName = ()  => {
             setData(data.sort((a, b) => {
             return a.name.localeCompare(b.name);
         }));
         setAsc(asc+1);
+        // e.nativeEvent.stopImmediatePropagation();
     }
 
     const sortByPrice = () => {
@@ -51,11 +62,30 @@ function DashboardView(props) {
         setAsc(asc+1);
     }
 
+    const onChangeSearch =(e : any) => {
+      let text = e.toLowerCase();
+      setSearchQuery(text);
+      if(text.length !== 0) {
+        setData(data.filter((item) => {
+          return item.name.toLowerCase().match(text)
+        }))
+      }
+      else if(text.length === 0) {
+        setData(flatlistDetails);
+      }
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <View>
             <Text style={styles.headerLabel}>List of Books</Text>
             </View>
+            <SearchBarComponent
+            style={{width: 370,height: 50,marginLeft: 20,marginTop: 10}}
+             placeholder="Search by Bookname"
+             onChangeText={onChangeSearch}
+             value={searchQuery}
+             />
             <Provider>
               <View
                 style={{
@@ -87,7 +117,8 @@ function DashboardView(props) {
                 containerStyle={{
                   width: 100,
                   marginLeft: 10,
-                  height: 40
+                  height: 40,
+                  // paddingBottom: 10
                 }}
                 onPress={openMenu}
                 />
@@ -132,3 +163,7 @@ const styles = StyleSheet.create({
       }
 })
 export default DashboardView;
+
+function e(e: any): void {
+  throw new Error('Function not implemented.');
+}
