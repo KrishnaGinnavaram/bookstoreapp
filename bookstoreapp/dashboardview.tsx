@@ -120,8 +120,8 @@ function DashboardView(props) {
               <Provider>
               <View>
             <Menu
-             visible={filterVisible}
-             onDismiss={closeFilterMenu}
+             visible={visible}
+             onDismiss={closeMenu}
              style={{marginTop: -620}}
               anchor={
               <View>
@@ -136,9 +136,9 @@ function DashboardView(props) {
                 type="outline"
                 titleStyle={{fontSize: 15,color: 'white'}}
                 containerStyle={{
-                  marginRight: 1
+                  marginRight: 0.5
                 }}
-                onPress={openFilterMenu}
+                onPress={openMenu}
                 />
               </View>
               }>
@@ -157,8 +157,8 @@ function DashboardView(props) {
                       height: 50,
                      }}>
             <Menu
-             visible={visible}
-             onDismiss={closeMenu}
+             visible={filterVisible}
+             onDismiss={closeFilterMenu}
              style={{marginTop: -620}}
               anchor={
               <View>
@@ -174,7 +174,7 @@ function DashboardView(props) {
                 titleStyle={{fontSize: 15,color: 'white'}}
                 containerStyle={{
                 }}
-                onPress={openMenu}
+                onPress={openFilterMenu}
                 />
               </View>
               }>
