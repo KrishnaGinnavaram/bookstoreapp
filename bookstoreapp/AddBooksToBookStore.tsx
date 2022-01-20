@@ -31,6 +31,9 @@ function AddBooksToBookStore(props) {
     .then(response => response.json())
     // Displaying results to console
     .then(data => console.log(data));
+    setBookName('');
+    setAuthor('');
+    setPrice('');
    }
     return (
         <SafeAreaView style={styles.container}>
@@ -44,6 +47,7 @@ function AddBooksToBookStore(props) {
             <TextInput
               style={styles.input}
               placeholder='Name of the Book'
+              value={bookName}
               onChangeText={(text) => setBookName(text)}
               maxLength={40}
             />
@@ -51,6 +55,7 @@ function AddBooksToBookStore(props) {
              <TextInput
               style={styles.input}
               placeholder='Name of the Author'
+              value={author}
               onChangeText={(text) => setAuthor(text)}
               maxLength={40}
             />
@@ -58,6 +63,7 @@ function AddBooksToBookStore(props) {
              <TextInput
               style={styles.input}
               placeholder='Add a Price'
+              value={price}
               onChangeText={(text) => setPrice(text)}
               maxLength={10}
             />

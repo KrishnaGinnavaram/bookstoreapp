@@ -6,6 +6,7 @@ import {Menu, Divider, Provider} from 'react-native-paper';
 import SearchBarComponent from '../components/SearchBarComponent';
 import ButtonComponent from '../components/ButtonComponent';
 import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 // import { Icon } from 'react-native-elements';
 function DashboardView(props) {
     const [data,setData] = useState([]);
@@ -30,13 +31,9 @@ function DashboardView(props) {
       setFilterVisible(false);
     }
 
-    useEffect(() => {
-        loadBookDetails();
-    },[]);
-
     // useEffect(() => {
-    //     console.log(data)
-    // },[data])
+    //     loadBookDetails();
+    // },[]);
 
     const loadBookDetails = async () => {
            const response = await fetch('https://61dddb4af60e8f0017668ac5.mockapi.io/api/v1/Book');
@@ -44,6 +41,14 @@ function DashboardView(props) {
            setData(details);
            setFlatListDetails(details);
     }
+
+    useFocusEffect(
+      React.useCallback(() => {
+        setSearchQuery('');
+        loadBookDetails();
+       console.log('focus')
+      },[])
+    )
 
     const sortByName = ()  => {
       setSearchQuery('');
