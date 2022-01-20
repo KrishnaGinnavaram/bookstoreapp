@@ -5,9 +5,8 @@ import DashboardListitem from './DashboardListitem';
 import {Menu, Divider, Provider} from 'react-native-paper';
 import SearchBarComponent from '../components/SearchBarComponent';
 import ButtonComponent from '../components/ButtonComponent';
-import { useNavigation } from '@react-navigation/native';
-// import { Icon } from 'react-native-elements';
-function DashboardView(props) {
+import TwoColumnDashboardLayout from './TwoColumnDashBoardLayout';
+function DashboardTwoColumnView(props) {
     const [data,setData] = useState([]);
     const [flatlistDetails,setFlatListDetails] = useState([]);
     const [searchQuery, setSearchQuery] = React.useState('');
@@ -46,15 +45,15 @@ function DashboardView(props) {
     }
 
     const sortByName = ()  => {
-      setSearchQuery('');
-       setData(data.sort((a, b) => {
+        setSearchQuery('');
+            setData(data.sort((a, b) => {
             return a.name.localeCompare(b.name);
         }));
         setVisible(false);
     }
 
     const sortByPrice = () => {
-       setSearchQuery('');
+        setSearchQuery('');
         setData(data.sort((a,b) => {
             return parseInt(a.price) - parseInt(b.price);
         }));
@@ -62,7 +61,7 @@ function DashboardView(props) {
     }
 
     const sortByDownloads = () => {
-       setSearchQuery('');
+        setSearchQuery('');
         setData(data.sort((a,b) => {
             return parseInt(a.downloads) - parseInt(b.downloads);
         }));
@@ -70,7 +69,7 @@ function DashboardView(props) {
     }
 
     const lowCost =  () => {
-      setSearchQuery('');
+        setSearchQuery('');
        setData(flatlistDetails.filter(item => {return item.price <= 100}))
       setFilterVisible(false);
   }
@@ -86,37 +85,6 @@ function DashboardView(props) {
     setData(flatlistDetails.filter(item => {return item.price > 500}))
      setFilterVisible(false);
     }
-
-    const twoColumnLayout = () => {
-      const navigation = useNavigation();
-      return (
-        <ButtonComponent
-        title="Switch to Two Column Layout"
-        buttonStyle={{
-          width: 250,
-          margin: 10
-        }}
-        icon={{
-          name: 'arrow-right',
-          type: 'font-awesome',
-          size: 15,
-          color: 'blue',
-        }}
-        type="clear"
-        titleStyle={{fontSize: 15,color: 'blue'}}
-        containerStyle={{
-          marginRight: 0.5
-        }}
-        onPress={() =>
-          {
-          navigation.navigate("Two Column Layout");
-          setData(flatlistDetails);
-          setSearchQuery('');
-        }
-        }
-        />
-      )
-      }
 
     const onChangeSearch =(e : any) => {
       let text = e.toLowerCase();
@@ -140,18 +108,18 @@ function DashboardView(props) {
              onChangeText={onChangeSearch}
              value={searchQuery}
              />
-             {twoColumnLayout()}
             <FlatList
-             style={{zIndex: -10,height: "72%"}}
+             numColumns={2}
+             style={{marginTop: 0,zIndex: -10,height: "82%"}}
              data={data}
              keyExtractor={value => value.id}
              renderItem={({item}) =>
-             <DashboardListitem
+             <TwoColumnDashboardLayout
              bookname={item.name}
-             author={item.author}
-             price={item.price}
-             downloads={item.downloads}
-            />
+              author={item.author}
+              price={item.price}
+              downloads={item.downloads}
+             />
              }
             />
 
@@ -244,4 +212,4 @@ const styles = StyleSheet.create({
         paddingTop: 10
       }
 })
-export default DashboardView;
+export default DashboardTwoColumnView;
