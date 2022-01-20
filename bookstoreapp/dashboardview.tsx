@@ -46,12 +46,10 @@ function DashboardView(props) {
       React.useCallback(() => {
         setSearchQuery('');
         loadBookDetails();
-       console.log('focus')
       },[])
     )
 
     const sortByName = ()  => {
-      setSearchQuery('');
        setData(data.sort((a, b) => {
             return a.name.localeCompare(b.name);
         }));
@@ -59,7 +57,6 @@ function DashboardView(props) {
     }
 
     const sortByPrice = () => {
-       setSearchQuery('');
         setData(data.sort((a,b) => {
             return parseInt(a.price) - parseInt(b.price);
         }));
@@ -67,7 +64,6 @@ function DashboardView(props) {
     }
 
     const sortByDownloads = () => {
-       setSearchQuery('');
         setData(data.sort((a,b) => {
             return parseInt(a.downloads) - parseInt(b.downloads);
         }));
@@ -75,20 +71,38 @@ function DashboardView(props) {
     }
 
     const lowCost =  () => {
-      setSearchQuery('');
-       setData(flatlistDetails.filter(item => {return item.price <= 100}))
+      if (searchQuery.length > 0) {
+        let text = searchQuery;
+        setData(flatlistDetails.filter(item => {return item.price <= 100 && item.name.toLowerCase().match(text)}))
+
+      }
+      else {
+        setData(flatlistDetails.filter(item => {return item.price <= 100}))
+      }
       setFilterVisible(false);
   }
 
   const mediumCost = () => {
-    setSearchQuery('');
-    setData(flatlistDetails.filter(item => {return item.price > 100 && item.price <= 500}))
+    if (searchQuery.length > 0) {
+      let text = searchQuery;
+      setData(flatlistDetails.filter(item => {return item.price > 100 && item.price <= 500 && item.name.toLowerCase().match(text)}))
+
+    }
+    else {
+      setData(flatlistDetails.filter(item => {return item.price > 100 && item.price <= 500}))
+    }
     setFilterVisible(false);
 }
 
   const highCost = () => {
-    setSearchQuery('');
-    setData(flatlistDetails.filter(item => {return item.price > 500}))
+    if (searchQuery.length > 0) {
+      let text = searchQuery;
+      setData(flatlistDetails.filter(item => {return item.price > 500 && item.name.toLowerCase().match(text)}))
+
+    }
+    else {
+      setData(flatlistDetails.filter(item => {return item.price > 500}))
+    }
      setFilterVisible(false);
     }
 

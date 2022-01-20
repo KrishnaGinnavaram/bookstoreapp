@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginForm from './LoginForm';
 import AddBooksToBookStore from './AddBooksToBookStore';
 import DashboardTwoColumnView from './DashboardTwoColumnView';
+import BookStoreProfile from './BookStoreProfile';
 function BottomTabNavigator(props) {
    const Tab = createBottomTabNavigator();
    const Stack = createStackNavigator();
@@ -15,7 +16,7 @@ function BottomTabNavigator(props) {
    const stackNavigator = () => {
    return (
     <Stack.Navigator initialRouteName="Single Column Layout">
-        <Stack.Screen name="Single Column Layout" component={DashboardView}/>
+        <Stack.Screen name="List of Books" component={DashboardView}/>
         <Stack.Screen name="Two Column Layout" component={DashboardTwoColumnView}/>
     </Stack.Navigator>
    )
@@ -31,6 +32,9 @@ function BottomTabNavigator(props) {
                 />
                  <Tab.Screen name="AddBooks" component={AddBooksToBookStore} options=
                 {{tabBarIcon: ({color}) => (<Icon name="plus" type="evilicon" color={color} tvParallaxProperties={undefined} />)}}
+                />
+                 <Tab.Screen name="Profile" component={BookStoreProfile} options=
+                {{tabBarIcon: ({color}) => (<Icon name="person" type="ionicon" color={color} tvParallaxProperties={undefined} />)}}
                 />
             </Tab.Navigator>
         </NavigationContainer>

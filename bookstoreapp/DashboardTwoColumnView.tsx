@@ -6,6 +6,8 @@ import {Menu, Divider, Provider} from 'react-native-paper';
 import SearchBarComponent from '../components/SearchBarComponent';
 import ButtonComponent from '../components/ButtonComponent';
 import TwoColumnDashboardLayout from './TwoColumnDashBoardLayout';
+import { useFocusEffect } from '@react-navigation/native';
+
 function DashboardTwoColumnView(props) {
     const [data,setData] = useState([]);
     const [flatlistDetails,setFlatListDetails] = useState([]);
@@ -44,6 +46,14 @@ function DashboardTwoColumnView(props) {
            setFlatListDetails(details);
     }
 
+
+    useFocusEffect(
+        React.useCallback(() => {
+          setSearchQuery('');
+          loadBookDetails();
+        },[])
+      )
+
     const sortByName = ()  => {
         setSearchQuery('');
             setData(data.sort((a, b) => {
@@ -69,22 +79,41 @@ function DashboardTwoColumnView(props) {
     }
 
     const lowCost =  () => {
-        setSearchQuery('');
-       setData(flatlistDetails.filter(item => {return item.price <= 100}))
-      setFilterVisible(false);
-  }
+        if (searchQuery.length > 0) {
+          let text = searchQuery;
+          setData(flatlistDetails.filter(item => {return item.price <= 100 && item.name.toLowerCase().match(text)}))
 
-  const mediumCost = () => {
-    setSearchQuery('');
-    setData(flatlistDetails.filter(item => {return item.price > 100 && item.price <= 500}))
-    setFilterVisible(false);
-}
-
-  const highCost = () => {
-    setSearchQuery('');
-    setData(flatlistDetails.filter(item => {return item.price > 500}))
-     setFilterVisible(false);
+        }
+        else {
+          setData(flatlistDetails.filter(item => {return item.price <= 100}))
+        }
+        setFilterVisible(false);
     }
+
+    const mediumCost = () => {
+        if (searchQuery.length > 0) {
+          let text = searchQuery;
+          setData(flatlistDetails.filter(item => {return item.price > 100 && item.price <= 500 && item.name.toLowerCase().match(text)}))
+
+        }
+        else {
+          setData(flatlistDetails.filter(item => {return item.price > 100 && item.price <= 500}))
+        }
+        setFilterVisible(false);
+    }
+
+      const highCost = () => {
+        if (searchQuery.length > 0) {
+          let text = searchQuery;
+          setData(flatlistDetails.filter(item => {return item.price > 500 && item.name.toLowerCase().match(text)}))
+
+        }
+        else {
+          setData(flatlistDetails.filter(item => {return item.price > 500}))
+        }
+         setFilterVisible(false);
+        }
+
 
     const onChangeSearch =(e : any) => {
       let text = e.toLowerCase();
@@ -103,7 +132,7 @@ function DashboardTwoColumnView(props) {
         <SafeAreaView style={styles.container}>
             <View style={{display: "flex"}}>
             <SearchBarComponent
-            style={{width: 370,height: 50,marginLeft: 20,marginTop: 10}}
+            style={{width: 370,height: 50,marginLeft: 10,marginTop: 10}}
              placeholder="Search by Bookname"
              onChangeText={onChangeSearch}
              value={searchQuery}
