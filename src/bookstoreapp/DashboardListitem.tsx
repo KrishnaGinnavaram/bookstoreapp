@@ -3,7 +3,6 @@ import { SafeAreaView, View } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { Text,Avatar } from 'react-native-elements';
 import { TouchableHighlight } from 'react-native';
-import AvatarComponent from '../components/AvatarComponent';
 function DashboardListitem({bookname,author,downloads,price}) {
     return (
         <TouchableHighlight>

@@ -1,7 +1,7 @@
 import React from "react";
 import {StyleSheet, View } from "react-native";
-import BottomTabNavigator from "./bookstoreapp/BottomTabNavigator";
-import TwoColumnDashboardLayout from "./bookstoreapp/TwoColumnDashBoardLayout";
+import BottomTabNavigator from "./src/bookstoreapp/BottomTabNavigator";
+import TwoColumnDashboardLayout from "./src/bookstoreapp/TwoColumnDashBoardLayout";
 
 export default function App() {
   return (
