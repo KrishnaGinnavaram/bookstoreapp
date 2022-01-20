@@ -1,8 +1,11 @@
 import React,{useState}from 'react';
 import { SafeAreaView,View} from 'react-native';
+import { useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 import { Input,Icon,Text,Card,Button} from 'react-native-elements';
 import { useForm, Controller } from 'react-hook-form';
+import jwtDecode from 'jwt-decode';
+import { Token } from 'typescript';
 function LoginForm({navigation}) {
     const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm();
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
@@ -34,6 +37,7 @@ function LoginForm({navigation}) {
             console.error(error);
           }
       };
+
      const resetValues = () => {
        reset({
            email: '',

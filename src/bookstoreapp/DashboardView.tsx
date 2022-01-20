@@ -51,7 +51,7 @@ function DashboardView(props) {
 
     const sortByName = ()  => {
        setData(data.sort((a, b) => {
-            return a.name.localeCompare(b.name);
+            return a.name.toString().localeCompare(b.name.toString());
         }));
         setVisible(false);
     }
@@ -65,6 +65,7 @@ function DashboardView(props) {
 
     const sortByDownloads = () => {
         setData(data.sort((a,b) => {
+            console.log(a.downloads);
             return parseInt(a.downloads) - parseInt(b.downloads);
         }));
         setVisible(false);
@@ -73,11 +74,11 @@ function DashboardView(props) {
     const lowCost =  () => {
       if (searchQuery.length > 0) {
         let text = searchQuery;
-        setData(flatlistDetails.filter(item => {return item.price <= 100 && item.name.toLowerCase().match(text)}))
+        setData(data.filter(item => {return item.price <= 100 && item.name.toString().toLowerCase().match(text)}))
 
       }
       else {
-        setData(flatlistDetails.filter(item => {return item.price <= 100}))
+        setData(data.filter(item => {return item.price <= 100}))
       }
       setFilterVisible(false);
   }
@@ -85,11 +86,11 @@ function DashboardView(props) {
   const mediumCost = () => {
     if (searchQuery.length > 0) {
       let text = searchQuery;
-      setData(flatlistDetails.filter(item => {return item.price > 100 && item.price <= 500 && item.name.toLowerCase().match(text)}))
+      setData(data.filter(item => {return item.price > 100 && item.price <= 500 && item.name.toString().toLowerCase().match(text)}))
 
     }
     else {
-      setData(flatlistDetails.filter(item => {return item.price > 100 && item.price <= 500}))
+      setData(data.filter(item => {return item.price > 100 && item.price <= 500}))
     }
     setFilterVisible(false);
 }
@@ -97,11 +98,11 @@ function DashboardView(props) {
   const highCost = () => {
     if (searchQuery.length > 0) {
       let text = searchQuery;
-      setData(flatlistDetails.filter(item => {return item.price > 500 && item.name.toLowerCase().match(text)}))
+      setData(data.filter(item => {return item.price > 500 && item.name.toString().toLowerCase().match(text)}))
 
     }
     else {
-      setData(flatlistDetails.filter(item => {return item.price > 500}))
+      setData(data.filter(item => {return item.price > 500}))
     }
      setFilterVisible(false);
     }
@@ -138,16 +139,16 @@ function DashboardView(props) {
       }
 
     const onChangeSearch =(e : any) => {
-      let text = e.toLowerCase();
-      setSearchQuery(text);
-      if(text.length !== 0) {
+      let text = e.toString().toLowerCase();
+       if(text.length !== 0) {
         setData(data.filter((item) => {
-          return item.name.toLowerCase().match(text)
+          return item.name.toString().toLowerCase().match(text)
         }))
       }
       else if(text.length === 0) {
         setData(flatlistDetails);
       }
+      setSearchQuery(text);
     }
 
     return (

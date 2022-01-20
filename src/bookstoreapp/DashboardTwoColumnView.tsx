@@ -55,15 +55,13 @@ function DashboardTwoColumnView(props) {
       )
 
     const sortByName = ()  => {
-        setSearchQuery('');
             setData(data.sort((a, b) => {
-            return a.name.localeCompare(b.name);
+            return a.name.toString().localeCompare(b.name.toString());
         }));
         setVisible(false);
     }
 
     const sortByPrice = () => {
-        setSearchQuery('');
         setData(data.sort((a,b) => {
             return parseInt(a.price) - parseInt(b.price);
         }));
@@ -71,7 +69,6 @@ function DashboardTwoColumnView(props) {
     }
 
     const sortByDownloads = () => {
-        setSearchQuery('');
         setData(data.sort((a,b) => {
             return parseInt(a.downloads) - parseInt(b.downloads);
         }));
@@ -81,7 +78,7 @@ function DashboardTwoColumnView(props) {
     const lowCost =  () => {
         if (searchQuery.length > 0) {
           let text = searchQuery;
-          setData(flatlistDetails.filter(item => {return item.price <= 100 && item.name.toLowerCase().match(text)}))
+          setData(flatlistDetails.filter(item => {return item.price <= 100 && item.name.toString().toLowerCase().match(text)}))
 
         }
         else {
@@ -93,7 +90,7 @@ function DashboardTwoColumnView(props) {
     const mediumCost = () => {
         if (searchQuery.length > 0) {
           let text = searchQuery;
-          setData(flatlistDetails.filter(item => {return item.price > 100 && item.price <= 500 && item.name.toLowerCase().match(text)}))
+          setData(flatlistDetails.filter(item => {return item.price > 100 && item.price <= 500 && item.name.toString().toLowerCase().match(text)}))
 
         }
         else {
@@ -105,7 +102,7 @@ function DashboardTwoColumnView(props) {
       const highCost = () => {
         if (searchQuery.length > 0) {
           let text = searchQuery;
-          setData(flatlistDetails.filter(item => {return item.price > 500 && item.name.toLowerCase().match(text)}))
+          setData(flatlistDetails.filter(item => {return item.price > 500 && item.name.toString().toLowerCase().match(text)}))
 
         }
         else {
@@ -116,11 +113,11 @@ function DashboardTwoColumnView(props) {
 
 
     const onChangeSearch =(e : any) => {
-      let text = e.toLowerCase();
+      let text = e.toString().toLowerCase();
       setSearchQuery(text);
       if(text.length !== 0) {
-        setData(data.filter((item) => {
-          return item.name.toLowerCase().match(text)
+        setData(flatlistDetails.filter((item) => {
+          return item.name.toString().toLowerCase().includes(text)
         }))
       }
       else if(text.length === 0) {
