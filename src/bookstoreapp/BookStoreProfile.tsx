@@ -29,13 +29,11 @@ function BookStoreProfile(props){
             }}
             overlayContainerStyle={{}}
           />
-          <View style={styles.body}>
+          <View>
             <View style={styles.bodyContent}>
 
               <View style={styles.buttonContainer}>
                 <Text style={styles.textFont}>UserName: <Text style={styles.textFontLabel}>Krishna</Text></Text>
-              </View>
-              <View style={styles.buttonContainer}>
                 <Text style={styles.textFont}>Email: <Text style={styles.textFontLabel}>Krishna@gmail.com</Text></Text>
               </View>
             </View>
@@ -65,14 +63,12 @@ const styles = StyleSheet.create({
     backgroundColor: "lightblue",
     height:200,
   },
-  body:{
-    marginBottom:150,
-  },
   bodyContent: {
     flex: 1,
     alignItems: 'center',
-    padding:30,
-    display: "flex"
+    height: 0,
+    display: "flex",
+    marginBottom: 100
   },
   info:{
     fontSize:16,
@@ -92,8 +88,9 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop:0,
-    height:25,
-    flexDirection: 'row',
+    height:300,
+    flexDirection: 'column',
+    display: "flex",
     justifyContent: 'flex-start',
     alignItems: 'center',
     marginBottom:10,

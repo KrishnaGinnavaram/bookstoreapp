@@ -127,9 +127,9 @@ function DashboardTwoColumnView(props) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{display: "flex",flex: 1}}>
+            <View style={{display: "flex",height: "100%"}}>
             <SearchBarComponent
-            style={{width: "90%",height: 50,marginLeft: 10,marginTop: 10}}
+            style={{width: "90%",marginLeft: 10,marginTop: 10}}
              placeholder="Search by Bookname"
              onChangeText={onChangeSearch}
              value={searchQuery}
@@ -185,10 +185,7 @@ function DashboardTwoColumnView(props) {
            </Provider>
 
            <Provider>
-           <View
-                style={{
-                      height: 50,
-                     }}>
+           <View>
             <Menu
              visible={filterVisible}
              onDismiss={closeFilterMenu}
@@ -227,15 +224,6 @@ function DashboardTwoColumnView(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1
-    },
-    headerLabel: {
-        fontSize: 20,
-        width: "100%",
-        backgroundColor: "lightblue",
-        borderWidth: 1,
-        textAlign: "center",
-        height: 50,
-        paddingTop: 10
-      }
+    }
 })
 export default DashboardTwoColumnView;

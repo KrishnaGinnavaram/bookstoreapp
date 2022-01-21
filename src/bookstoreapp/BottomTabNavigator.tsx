@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationContainer, StackActions } from '@react-navigation/native';
-import { Text } from 'react-native';
+import { SafeAreaView, StyleSheet, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from 'react-native-elements';
 import DashboardView from './DashboardView';
@@ -22,6 +22,7 @@ function BottomTabNavigator(props) {
    )
    }
     return (
+        <SafeAreaView style={styles.container}>
         <NavigationContainer>
             <Tab.Navigator tabBarOptions={{activeTintColor: "blue",inactiveTintColor: "gray"}}>
             <Tab.Screen name="Login" component={LoginForm} options=
@@ -38,7 +39,14 @@ function BottomTabNavigator(props) {
                 />
             </Tab.Navigator>
         </NavigationContainer>
+        </SafeAreaView>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    }
+})
 
 export default BottomTabNavigator;

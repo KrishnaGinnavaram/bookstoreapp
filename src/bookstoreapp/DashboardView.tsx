@@ -165,9 +165,9 @@ function DashboardView(props) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{display: "flex",flex: 1}}>
+            <View style={{display: "flex",height: "100%"}}>
             <SearchBarComponent
-            style={{width: "90%",height: 50,marginLeft: 20,marginTop: 10}}
+            style={{width: "90%",marginLeft: 20,marginTop: 10}}
              placeholder="Search by Bookname"
              onChangeText={onChangeSearch}
              value={searchQuery}
@@ -189,7 +189,6 @@ function DashboardView(props) {
 
             <View style={{display: "flex",flexDirection: "row",position: "relative"}}>
               <Provider>
-              <View>
             <Menu
              visible={visible}
              onDismiss={closeMenu}
@@ -219,14 +218,9 @@ function DashboardView(props) {
                <Divider />
                <Menu.Item onPress={sortByName} title="Book Name" />
             </Menu>
-           </View>
            </Provider>
 
            <Provider>
-           <View
-                style={{
-                      height: 50,
-                     }}>
             <Menu
              visible={filterVisible}
              onDismiss={closeFilterMenu}
@@ -255,7 +249,6 @@ function DashboardView(props) {
                <Divider />
                <Menu.Item onPress={highCost} title=" Price > $500" />
             </Menu>
-           </View>
            </Provider>
            </View>
            </View>
@@ -265,15 +258,6 @@ function DashboardView(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1
-    },
-    headerLabel: {
-        fontSize: 20,
-        width: "100%",
-        backgroundColor: "lightblue",
-        borderWidth: 1,
-        textAlign: "center",
-        height: 50,
-        paddingTop: 10
-      }
+    }
 })
 export default DashboardView;
