@@ -193,7 +193,7 @@ function DashboardTwoColumnView(props) {
               anchor={
               <View>
                 <ButtonComponent
-                title="Filter by"
+                title="Filter byy"
                 icon={{}}
                 buttonStyle={{
                   backgroundColor: 'rgba(78, 116, 289, 1)',
