@@ -139,7 +139,7 @@ const styles =StyleSheet.create({
   },
   inputText:{
     position: "relative",
-    top: 100,
+    top: "50%",
     border: "0px"
   },
   loginText: {

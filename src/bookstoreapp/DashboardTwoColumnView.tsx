@@ -189,11 +189,11 @@ function DashboardTwoColumnView(props) {
             <Menu
              visible={filterVisible}
              onDismiss={closeFilterMenu}
-             style={{top:-150, left:"50%" , position: 'absolute'}}
+             style={{top:-150, left:"45%" , position: 'absolute'}}
               anchor={
               <View>
                 <ButtonComponent
-                title="Filter byy"
+                title="Filter by"
                 icon={{}}
                 buttonStyle={{
                   backgroundColor: 'rgba(78, 116, 289, 1)',
