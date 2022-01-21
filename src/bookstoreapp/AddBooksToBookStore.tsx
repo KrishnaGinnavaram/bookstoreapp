@@ -41,7 +41,7 @@ function AddBooksToBookStore(props) {
             <Text style={styles.headerLabel}>Add a New Book</Text>
             </View>
 
-           <View style={{display: "flex",justifyContent: "space-between",height: "90%"}}>
+           <View style={{display: "flex",justifyContent: "space-between",flex: 1}}>
             <View>
             <Text style={styles.label}>BookName:</Text>
             <TextInput
@@ -77,8 +77,7 @@ function AddBooksToBookStore(props) {
                   borderColor: 'white',
                 }}
                 containerStyle={{
-                  width: "90%",
-                  marginLeft: 20
+                  width: "100%"
                 }}
                 titleStyle={{ fontWeight: 'bold' }}
                 onPress={addDetails}

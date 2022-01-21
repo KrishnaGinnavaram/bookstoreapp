@@ -127,16 +127,16 @@ function DashboardTwoColumnView(props) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{display: "flex"}}>
+            <View style={{display: "flex",flex: 1}}>
             <SearchBarComponent
-            style={{width: 370,height: 50,marginLeft: 10,marginTop: 10}}
+            style={{width: "90%",height: 50,marginLeft: 10,marginTop: 10}}
              placeholder="Search by Bookname"
              onChangeText={onChangeSearch}
              value={searchQuery}
              />
             <FlatList
              numColumns={2}
-             style={{marginTop: 0,zIndex: -10,height: "82%"}}
+             style={{marginTop: 0,zIndex: -10}}
              data={data}
              keyExtractor={value => value.id}
              renderItem={({item}) =>
@@ -155,7 +155,7 @@ function DashboardTwoColumnView(props) {
             <Menu
              visible={visible}
              onDismiss={closeMenu}
-             style={{marginTop: -620}}
+             style={{top:-150, left:0 , position: 'absolute'}}
               anchor={
               <View>
                 <ButtonComponent
@@ -192,7 +192,7 @@ function DashboardTwoColumnView(props) {
             <Menu
              visible={filterVisible}
              onDismiss={closeFilterMenu}
-             style={{marginTop: -620}}
+             style={{top:-150, left:"50%" , position: 'absolute'}}
               anchor={
               <View>
                 <ButtonComponent
